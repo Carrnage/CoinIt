@@ -24,7 +24,7 @@ export default function LoginScreen({navigation}) {
         <TextInput
           textContentType="password"
           secureTextEntry={true}
-          enterKeyHint="Enter"
+          enterKeyHint="enter"
         />
         <Button title='Login'
         onPress={()=> navigation.navigate('Pin')}/>
