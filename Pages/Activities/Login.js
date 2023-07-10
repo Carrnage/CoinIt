@@ -18,12 +18,12 @@ export default function LoginScreen({navigation}) {
           autoComplete="email"
           textContentType="emailAddress"
           inputMode="email"
-          enterKeyHint="Next"
+          enterKeyHint="next"
         />
         <Text>Password</Text>
         <TextInput
           textContentType="password"
-          secureTextEntry="true"
+          secureTextEntry={true}
           enterKeyHint="Enter"
         />
         <Button title='Login'
