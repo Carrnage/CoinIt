@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Button, Text, TextInput, View } from "react-native";
-import { styles } from "../../Stylesheets/AppStyle";
+import { styles } from "../../Stylesheets/AppStyleLight";
 
 const Stack = createNativeStackNavigator();
 
