@@ -2,7 +2,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, Button } from "react-native";
-import { styles } from "../../Stylesheets/AppStyle";
+import { styles } from "../../Stylesheets/AppStyleLight";
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+const Tab = createMaterialBottomTabNavigator();
+
 
 export default function HomeScreen({navigation}) {
   return (

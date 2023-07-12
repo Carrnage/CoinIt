@@ -1,17 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text, View, Button } from "react-native";
-import { styles } from "../../Stylesheets/AppStyle";
+import { Text, View, Button, TextInput } from "react-native";
+import { styles } from "../../Stylesheets/AppStyleLight";
+import { useState } from "react";
 
 export default function PinScreen({ navigation }) {
+  const [pin,setPin] = useState('00000');
+  const [pos,setPos] = useState()
+
+  function numberpress() {
+    
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
+      <Text>#####</Text>
       <View>
         <Text>Pin</Text>
-        <View style={[{ flexDirection: "column" }]}>
+        <View style={styles.button[{ flexDirection: "column" }]}>
           <View style={[{ flexDirection: "row" }]}>
             <Button title="7" />
             <Button title="8" />
