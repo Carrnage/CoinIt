@@ -7,10 +7,10 @@ import { useState } from "react";
 
 export default function PinScreen({ navigation }) {
   const [pin,setPin] = useState('00000');
-  const [pos,setPos] = useState()
+  const [pos,setPos] = useState('1')
 
-  function numberpress() {
-    
+  const numberpress=e=> {
+    const title =e.target;
   }
 
   return (
