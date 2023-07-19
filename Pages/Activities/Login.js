@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 export default function LoginScreen({ navigation }) {
   const [loginDTO, setLoginDTO] = useState({
-    id: "login",
+    id: "AuthRequest",
     email: "default",
     password: "default",
   });
