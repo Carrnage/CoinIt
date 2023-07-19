@@ -13,7 +13,10 @@ export default function LoginScreen({ navigation }) {
     email: "default",
     password: "default",
   });
-
+  function sendLogin() {
+    console.log(loginDTO);
+    navigation.navigate("Pin");
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
@@ -46,10 +49,7 @@ export default function LoginScreen({ navigation }) {
         />
         <Button
           title="Login"
-          onPress={() => {
-            console.log(loginDTO);
-            navigation.navigate("Pin");
-          }}
+          onPress={sendLogin}
         />
       </View>
     </View>
