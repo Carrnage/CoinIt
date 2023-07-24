@@ -1,15 +1,29 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { SectionList, Text, View } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
+import { useState } from "react";
 
 export default function SendScreen() {
+  const [paymentRequest, setPaymentRequest] = useState({
+    id: "Payment Request",
+    personal_email: "default",
+    merchant_email: "default",
+    amount: 0,
+    payment_method: "default",
+    status: 1,
+  })
+  const [paymentResponse,setPaymentResponse] = useState({
+    message: "default",
+  })
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
+        <Text></Text>
         <Text>Send</Text>
       </View>
     </View>
