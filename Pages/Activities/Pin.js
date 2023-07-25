@@ -10,7 +10,7 @@ export default function PinScreen({ navigation }) {
   const [pos,setPos] = useState('1')
 
   const numberpress=e=> {
-    const title =e.target;
+    const title =e.target; 
   }
 
   return (
@@ -39,7 +39,7 @@ export default function PinScreen({ navigation }) {
           <View style={[{ flexDirection: "row" }]}>
             <Button title="<" />
             <Button title="0" />
-            <Button title="=" onPress={() => navigation.navigate("Home")} />
+            <Button title="=" onPress={() => navigation.navigate("CoinIt - Home")} />
           </View>
         </View>
       </View>

@@ -40,7 +40,8 @@ export default function SendScreen() {
         />
         <Text>Amount</Text>
         <TextInput
-          inputMode=""
+          keyboardType="decimal-pad"
+          inputMode="decimal"
         />
         <Text>Send</Text>
       </View>

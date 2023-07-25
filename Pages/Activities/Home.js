@@ -15,11 +15,6 @@ export default function HomeScreen({navigation}) {
       <StatusBar style="auto" />
       <View>
         <Text>Home</Text>
-        <Button title='Receive'
-        onPress={()=> navigation.navigate('Receive')}/>
-        <Button title='Send'
-        onPress={()=> navigation.navigate('Send')}/>
-
       </View>
     </View>
   );

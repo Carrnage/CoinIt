@@ -15,7 +15,7 @@ export default function LoginScreen({ navigation }) {
   });
   function sendLogin() {
     console.log(loginDTO);
-    navigation.navigate("Pin");
+    navigation.navigate("CoinIt - Pin");
   }
   return (
     <View style={styles.container}>

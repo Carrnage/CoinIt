@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ export default function ReceiveScreen() {
     personal_email: "default",
     merchant_email: "default",
     amount: 0,
-    message: "default",
+    message: "default"
   })
   const [paymentConfirm, setPaymentConfirm] = useState({
     id: "dunno, workshop it",
@@ -31,8 +31,8 @@ export default function ReceiveScreen() {
         <Text>{paymentStatus.merchant_email}</Text>
         <Text>{paymentStatus.amount}</Text>
         <Text>{paymentStatus.message}</Text>
-        <Button>Confirm</Button>
-        <Button>Decline</Button>
+        <Button title="Confirm"/>
+        <Button title="Decline"/>
       </View>
     </View>
   );

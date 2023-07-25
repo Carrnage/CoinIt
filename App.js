@@ -11,14 +11,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-function hometabs() {
+function Hometabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
       barStyle={{ backgroundColor: "white" }}
     >
       <Tab.Screen
-        name="Home"
+        name="CoinIt - Home"
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
@@ -28,7 +28,7 @@ function hometabs() {
         }}
       />
       <Tab.Screen
-        name="Send"
+        name="Coinit - Send"
         component={SendScreen}
         options={{
           tabBarLabel: "Send",
@@ -42,7 +42,7 @@ function hometabs() {
         }}
       />
       <Tab.Screen
-        name="Receive"
+        name="CoinIt - Receive"
         component={ReceiveScreen}
         options={{
           tabBarLabel: "Receive",
@@ -62,9 +62,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Pin" component={PinScreen} />
-        <Stack.Screen name="Home" component={hometabs} />
+        <Stack.Screen name="CoinIt - Login" component={LoginScreen} />
+        <Stack.Screen name="CoinIt - Pin" component={PinScreen} />
+        <Stack.Screen name="CoinIt - Home" component={Hometabs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
