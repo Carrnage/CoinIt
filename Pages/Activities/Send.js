@@ -31,18 +31,21 @@ export default function SendScreen() {
           inputMode="email"
           enterKeyHint="next"
         />
-        <Text>Merchant Email</Text>        
+        <Text>Merchant Email</Text>
         <TextInput
           autoComplete="email"
           textContentType="emailAddress"
           inputMode="email"
           enterKeyHint="next"
+          onChange={(setEmail) =>
+            setPaymentRequest((paymentRequest) => ({
+              ...paymentRequest,
+              merchant_email: setEmail.target.value,
+            }))
+          }
         />
         <Text>Amount</Text>
-        <TextInput
-          keyboardType="decimal-pad"
-          inputMode="decimal"
-        />
+        <TextInput keyboardType="decimal-pad" inputMode="decimal" />
         <Text>Send</Text>
       </View>
     </View>
