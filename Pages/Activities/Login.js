@@ -18,7 +18,7 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate("CoinIt - Pin");
   }
   return (
-    <View style={styles.container}>
+    <View style={[{flexDirection:'column'},styles.container]}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
