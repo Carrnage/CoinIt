@@ -6,6 +6,7 @@ import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 import { TextInput } from "react-native-paper";
 import QRCode from "react-native-qrcode-svg";
+import { stringifyValueWithProperty } from "react-native-web/dist/cjs/exports/StyleSheet/compiler";
 
 export default function SendScreen() {
   const [paymentRequest, setPaymentRequest] = useState({
@@ -19,19 +20,15 @@ export default function SendScreen() {
   const [paymentResponse, setPaymentResponse] = useState({
     message: "default",
   });
-  function onSend() {
-
-  }
+  function onSend() {}
+  var qrcode = JSON.stringify(paymentRequest)
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
-        {paymentRequest.status > 0 &&
-        <QRCode
-          value="{paymentRequest}"
-        />}
+        {paymentRequest.status > 0 && <QRCode value={qrcode} />}
         <Text>Personal email</Text>
         <TextInput
           disabled="true"
@@ -56,10 +53,15 @@ export default function SendScreen() {
         />
         <Text>Amount</Text>
         <TextInput keyboardType="decimal-pad" inputMode="decimal" />
-        <Button title="Send" onPress={(setStatus) => setPaymentRequest((paymentRequest) => ({
-          ...paymentRequest,
-          status: setStatus=1
-        }))}/>
+        <Button
+          title="Send"
+          onPress={(setStatus) =>
+            setPaymentRequest((paymentRequest) => ({
+              ...paymentRequest,
+              status: (setStatus = 1),
+            }))
+          }
+        />
       </View>
     </View>
   );
