@@ -15,7 +15,14 @@ export default function LoginScreen({ navigation }) {
   });
   function sendLogin() {
     console.log(loginDTO);
-    navigation.navigate("CoinIt - Pin");
+    switch(loginDTO.email){
+      case 'debug':
+        console.log("debug log in if seen outside test build PANIC");
+        navigation.navigate("CoinIt - Pin");
+      default:
+        console.log("login failed try to debug")
+        break;
+    }
   }
   return (
     <View style={[{flexDirection:'column'},styles.container]}>
