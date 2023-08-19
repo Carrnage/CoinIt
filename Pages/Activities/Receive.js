@@ -1,38 +1,73 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, TouchableOpacity } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
+import { Camera, CameraType } from "expo-camera";
 
 const Stack = createNativeStackNavigator();
 
-
 export default function ReceiveScreen() {
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
   const [paymentStatus, setPaymentStatus] = useState({
     id: "ConfirmResponse",
     payment_id: 0,
     personal_email: "default",
     merchant_email: "default",
     amount: 0,
-    message: "default"
-  })
+    message: "default",
+  });
   const [paymentConfirm, setPaymentConfirm] = useState({
     id: "dunno, workshop it",
     payment_id: 0,
-    confirm: false
-  })
+    confirm: false,
+  });
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
+  function toggleCameraType() {
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back
+    );
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
+        <View style={styles.container}>
+          <Camera style={styles.camera} type={type}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={toggleCameraType}
+              >
+                <Text style={styles.text}>Flip Camera</Text>
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        </View>
+        <View style={styles.container}>
         <Text>{paymentStatus.personal_email}</Text>
         <Text>{paymentStatus.merchant_email}</Text>
         <Text>{paymentStatus.amount}</Text>
         <Text>{paymentStatus.message}</Text>
-        <Button title="Confirm"/>
-        <Button title="Decline"/>
+        <Button title="Confirm" />
+        <Button title="Decline" />
+        </View>
       </View>
     </View>
   );

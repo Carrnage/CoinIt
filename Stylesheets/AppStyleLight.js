@@ -19,6 +19,15 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'space-between'
     },
+    camera: {
+      flex: 1,
+    },
+    buttonContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'transparent',
+      margin: 64,
+    },    
     title: {
       flex: 1,
       fontSize: 50,
@@ -27,6 +36,12 @@ export const styles = StyleSheet.create({
       color: 'black',
       alignItems: 'center',
       justifyContent: 'center'
-    }
+    },
+    text: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: 'white',
+    },
+  
   });
   
