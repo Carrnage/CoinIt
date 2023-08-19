@@ -35,10 +35,10 @@ export default function LoginScreen({ navigation }) {
           textContentType="emailAddress"
           inputMode="email"
           enterKeyHint="next"
-          onChange={(setEmail) =>
+          onChangeText={(setEmail) =>
             setLoginDTO((loginDTO) => ({
               ...loginDTO,
-              email: setEmail.target.value,
+              email: setEmail,
             }))
           }
         />
@@ -47,10 +47,10 @@ export default function LoginScreen({ navigation }) {
           textContentType="password"
           secureTextEntry={true}
           enterKeyHint="enter"
-          onChange={(setPassword) =>
+          onChangeText={(setPassword) =>
             setLoginDTO((loginDTO) => ({
               ...loginDTO,
-              password: setPassword.target.value,
+              password: setPassword,
             }))
           }
         />
