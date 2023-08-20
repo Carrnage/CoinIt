@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { Button, SectionList, Text, View } from "react-native";
+import { Button, SectionList, Text, View, TextInput } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
-import { TextInput } from "react-native-paper";
+
 import QRCode from "react-native-qrcode-svg";
 
 export default function SendScreen() {
@@ -12,19 +12,27 @@ export default function SendScreen() {
     id: "Payment Request",
     personal_email: "default",
     merchant_email: "default",
-    amount: 0,
+    amount: 0.0,
     payment_method: "default",
     status: 0,
   });
-  const [qrcode, setqrcode] =useState(JSON.stringify(paymentRequest.amount&paymentRequest.personal_email))
+  const [qrcode, setqrcode] = useState(
+    JSON.stringify(paymentRequest)
+  );
   const [paymentResponse, setPaymentResponse] = useState({
     message: "default",
   });
   function onSend() {
-    setPaymentRequest((paymentRequest) => ({
-      ...paymentRequest,
-      status: 1,
-    }))}
+    setqrcode(
+      JSON.stringify(paymentRequest)
+    ),
+      setPaymentRequest((paymentRequest) => ({
+        ...paymentRequest,
+        status: 1,
+      }));
+    console.log(qrcode);
+    console.log(paymentRequest);
+  }
 
   return (
     <View style={styles.container}>
@@ -47,19 +55,25 @@ export default function SendScreen() {
           textContentType="emailAddress"
           inputMode="email"
           enterKeyHint="next"
-          onChange={(setEmail) =>
+          onChangeText={(setEmail) =>
             setPaymentRequest((paymentRequest) => ({
               ...paymentRequest,
-              merchant_email: setEmail.target.value,
+              merchant_email: setEmail,
             }))
           }
         />
         <Text>Amount</Text>
-        <TextInput keyboardType="decimal-pad" inputMode="decimal" />
-        <Button
-          title="Send"
-          onPress={onSend}
+        <TextInput
+          keyboardType="decimal-pad"
+          inputMode="decimal"
+          onChangeText={(newAmount) =>
+            setPaymentRequest((paymentRequest) => ({
+              ...paymentRequest,
+              amount: newAmount,
+            }))
+          }
         />
+        <Button title="Send" onPress={onSend} />
       </View>
     </View>
   );
