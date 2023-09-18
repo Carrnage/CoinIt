@@ -5,9 +5,10 @@ import { Text } from '@chakra-ui/react';
 
 export default function Registration() {
 
-  const[userID,setUserID]= useState(0);
+  const[userID,setUserID]= useState(1);
   const[firstName,setFirstName] = useState('');
   const[lastName,setLastName] = useState('');
+  const[gender,setGender]= useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const[phone,setPhone] = useState('');
@@ -40,17 +41,10 @@ export default function Registration() {
         value={lastName}
         onChangeText={setLastName}
       />
-
       <TextInput
-        placeholder="Enter your Phone"
-        value={phone}
-        onChangeText={setPhone}
-      />
-
-      <TextInput
-        placeholder="Enter your Account"
-        value={account}
-        onChangeText={setAccount}
+        placeholder="Enter your Gender"
+        value={gender}
+        onChangeText={setGender}
       />
 
       <TextInput
@@ -63,6 +57,16 @@ export default function Registration() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
+      />
+      <TextInput
+        placeholder="Enter your Phone"
+        value={phone}
+        onChangeText={setPhone}
+      />
+      <TextInput
+        placeholder="Enter your Account"
+        value={account}
+        onChangeText={setAccount}
       />
       <Button title="Register" onPress={handleRegistration} />
     </View>
