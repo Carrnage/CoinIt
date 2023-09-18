@@ -9,9 +9,17 @@ const db = SQLite.openDatabase({
 // Create a table
 db.transaction(tx => {
   tx.executeSql(
-    'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, FirstName TEXT, LastName text, email TEXT, password text, phone text, account text)',
-    'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, FirstName TEXT, LastName text, email TEXT, password text, phone text, account text)'
-  
+    'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, FirstName varchar(20), LastName varchar(20), email varchar(30), password varchar(15), phone varchar(11), account varchar(15))',
+    'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, FirstName TEXT, LastName text, email TEXT, password text, phone text, account text)',
+    [],
+    (sqltx:SQLTransaction, reg:SQLResultSet)=>{
+      console.log("Table has been created successful");
+    },
+
+    error=>{
+      console.log("Error in creating table"+error.message);
+    },
+
     );
 });
 
