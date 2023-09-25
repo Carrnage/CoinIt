@@ -6,13 +6,18 @@ import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { Camera, CameraType, BarCodeSettings } from "expo-camera";
+import {StripeProvider} from '@stripe/stripe-react-native';
+import { useStripe } from '@stripe/stripe-react-native';
+
 
 const Stack = createNativeStackNavigator();
+
 
 export default function ReceiveScreen() {
   const [type, setType] = useState(CameraType.back);
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [paymentStatus, setPaymentStatus] = useState({
     id: "ConfirmResponse",
     payment_id: 0,
@@ -51,6 +56,55 @@ export default function ReceiveScreen() {
       current === CameraType.back ? CameraType.front : CameraType.back
     );
   }
+
+const handleConfirm=async()=>{
+  //create a payment intent from payer
+   const response = await createPaymentIntent({amount:Math.floor(amount*100)});
+   console.log(response);
+   if (response.error) {
+    Alert.alert('Something went wrong');
+    return;
+  //Initilize the payment sheet
+  const initResponse = await initPaymentSheet({
+    merchantDisplayName: 'notJust.dev',
+    paymentIntentClientSecret: response.data.paymentIntent,
+  });
+  if (initResponse.error) {
+    console.log(initResponse.error);
+    Alert.alert('Something went wrong');
+    return;
+  }
+  //present the payment sheet on stripe
+  const paymentResponse = await presentPaymentSheet();
+
+  if (paymentResponse.error) {
+    Alert.alert(
+      `Error code: ${paymentResponse.error.code}`,
+      paymentResponse.error.message
+    );
+    return;
+  }
+  //if payment is ok, create order
+}
+}
+
+
+// createPaymentIntent: builder.mutation({
+//   query: (data) => ({
+//     url: 'payments/intents',
+//     method: 'POST',
+//     body: data,
+//   }),
+// }),
+
+// createOrder: builder.mutation({
+//   query: (newOrder) => ({
+//     url: 'orders',
+//     method: 'POST',
+//     body: newOrder,
+//   }),
+// }),
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
