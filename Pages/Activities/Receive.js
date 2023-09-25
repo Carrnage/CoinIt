@@ -45,6 +45,8 @@ export default function ReceiveScreen() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
+    setPaymentStatus(JSON.parse(data))
+    console.log(paymentStatus)
   };
   function toggleCameraType() {
     setType((current) =>
@@ -56,7 +58,7 @@ export default function ReceiveScreen() {
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
-        <View>
+        <View style={{flex:0.6}}>
           <Camera
             style={styles.camera}
             type={type}
@@ -76,7 +78,7 @@ export default function ReceiveScreen() {
           </Camera>
           {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
         </View>
-        <View style={styles.container}>
+        <View style={{flex:0.3}}>
           <Text>{paymentStatus.personal_email}</Text>
           <Text>{paymentStatus.merchant_email}</Text>
           <Text>{paymentStatus.amount}</Text>

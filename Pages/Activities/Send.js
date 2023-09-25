@@ -39,10 +39,10 @@ export default function SendScreen() {
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
-        {paymentRequest.status > 0 && <QRCode value={qrcode} />}
+        {paymentRequest.status > 0 && <QRCode style={{flex:0.5}} value={qrcode} />}
         <Text>Personal email</Text>
         <TextInput
-          disabled="true"
+          disabled={true}
           autoComplete="email"
           textContentType="emailAddress"
           inputMode="email"

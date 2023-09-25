@@ -19,6 +19,7 @@ export default function LoginScreen({ navigation }) {
       case 'debug':
         console.log("debug log in if seen outside test build PANIC");
         navigation.navigate("CoinIt - Pin");
+        break;
       default:
         console.log("login failed try to debug")
         break;
