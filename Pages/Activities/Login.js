@@ -27,11 +27,12 @@ export default function LoginScreen({ navigation }) {
   }
   return (
     <View style={[{flexDirection:'column'},styles.container]}>
-      <Text style={styles.title}>CoinIt</Text>
+      <Text style={{fontSize:'xx-large', padding: ''}}>CoinIt</Text>
       <StatusBar style="auto" />
       <View>
-        <Text>Email</Text>
+        <Text style={{fontSize:'large'}}>Email</Text>
         <TextInput
+          style={{borderColor:'black', borderWidth: 2, padding: 10, borderRadius: 6}}
           autoComplete="email"
           textContentType="emailAddress"
           inputMode="email"
@@ -43,8 +44,9 @@ export default function LoginScreen({ navigation }) {
             }))
           }
         />
-        <Text>Password</Text>
+        <Text style={{fontSize:'large'}}>Password</Text>
         <TextInput
+          style={{borderColor:'black', borderWidth: 2, padding: 10, borderRadius: 6}}
           textContentType="password"
           secureTextEntry={true}
           enterKeyHint="enter"

@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
 import { Text } from '@chakra-ui/react';
@@ -73,3 +73,4 @@ export default function Registration() {
     </div>
   )
 }
+*/
