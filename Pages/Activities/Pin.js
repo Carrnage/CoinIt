@@ -3,7 +3,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text, View, Button, TextInput } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SQLite } from "react-native-sqlite-storage";
+
+const db=SQLite.opendatabase({
+  name:'CoinIt.db', 
+  location:'default',
+});
 
 export default function PinScreen({ navigation }) {
   const [pin, setPin] = useState([
@@ -14,7 +20,40 @@ export default function PinScreen({ navigation }) {
     { pos: 5, digit: null },
   ]);
   const [position, setPosition] =useState(1)
+  const[users,setUsers]=useState();
+  const[message,setMessage]=useState("");
+
+
   var fancypin = "#####";
+
+  useEffect(() => {
+    getData();
+}, []);
+
+function getData(){
+  db.transaction(tx => {
+    tx.executeSql('SELECT * FROM Users', [], 
+    (tx, results) => {
+      const len = results.rows.length;
+      for (let i = 0; i < len; i++) {
+        const row = results.rows.item(i);
+        console.log(`User ID: ${row.id}, Name: ${row.name}, Email: ${row.email}`);
+        setUsers(row);
+      }
+    });
+  });
+}
+
+function handleConfirm(){
+  const user = users.find((us)=>us.pin===pin);
+  if(user){
+    navigation.navigate("CoinIt - Home")
+  }else{
+     setMessage("Pin number was invalid. Please check it or logon!!")
+  }
+}
+
+
   const numberpress = (e) => {
     if (Number.isInteger(e)) {
       var currentpin = pin.find((pinpos) => {
