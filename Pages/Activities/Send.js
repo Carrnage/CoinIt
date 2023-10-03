@@ -53,7 +53,7 @@ export default function SendScreen() {
   async function  createPaymentTable (){
   await db.transaction(async(tx) => {
   await tx.executeSql(
-    'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, MerchantEmail varchar(30), PersonalEmail varchar(30), Amount decimal(5,2), CreateDate datetime, PaymentDate datetime, Status varchar(10))',
+    'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, MerchantEmail varchar(30), PersonalEmail varchar(30), Amount decimal(5,2), CreateDate datetime, PaymentDate datetime, PaymentID varchar(30), Status varchar(10))',
     [],
     (sqlTnx, reg)=>{
       console.log("Payment Table has been created successful");
@@ -69,8 +69,9 @@ const AddPayment = () =>{
     alert("Please input valid user information!");
     return false;
   }
+  
   db.transaction(tx => {
-    tx.executeSql('INSERT INTO Users (MerchantEmail, PersonalEmail, Amount, CreateDate, PaymentDate, Status) VALUES (?,?,?,?,?,?)', [merchantEmail,personalEmail,amount,generateDate,paymentDate,status]);
+    tx.executeSql('INSERT INTO Users (MerchantEmail, PersonalEmail, Amount, CreateDate, PaymentDate, PaymentID, Status) VALUES (?,?,?,?,?,?,?)', [merchantEmail,personalEmail,amount,generateDate,paymentDate,paymentIntentID,status]);
   (sqlTnx,reg)=>{
      console.log('The ${personalEmail} record has been added successful');
   },

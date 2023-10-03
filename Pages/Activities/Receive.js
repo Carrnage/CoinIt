@@ -8,9 +8,16 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { Camera, CameraType, BarCodeSettings } from "expo-camera";
 import {StripeProvider} from '@stripe/stripe-react-native';
 import { useStripe } from '@stripe/stripe-react-native';
+import Stripe from 'react-native-stripe-payments';
+import SQLite from 'react-native-sqlite-storage'
 
+const db = SQLite.openDatabase({ 
+  name:'CoinIt.db', 
+  location:'default',
+  },)
 
 const Stack = createNativeStackNavigator();
+
 
 
 export default function ReceiveScreen() {
@@ -37,6 +44,37 @@ export default function ReceiveScreen() {
     // Camera permissions are still loading
     return <View />;
   }
+
+  //database actions
+  //create a payment table in database
+  async function  createPaymentTable (){
+    await db.transaction(async(tx) => {
+    await tx.executeSql(
+      'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, MerchantEmail varchar(30), PersonalEmail varchar(30), Amount decimal(5,2), CreateDate datetime, PaymentDate datetime, PaymentID varchar(30), Status varchar(10))',
+      [],
+      (sqlTnx, reg)=>{
+        console.log("Payment Table has been created successful");
+      },
+      error=>{
+        console.log("Error in creating table"+error.message);
+      },);
+      });}
+
+  //insert data to database after scanning QR Code
+  const AddPayment = () =>{
+    if(personalEmail.length==0||merchantEmail.length==0||amount==null||generateDate.length==0){
+      alert("Please input valid user information!");
+      return false;
+    }
+    db.transaction(tx => {
+      tx.executeSql('INSERT INTO Users (MerchantEmail, PersonalEmail, Amount, CreateDate, PaymentDate, PaymentID, Status) VALUES (?,?,?,?,?,?,?)', [merchantEmail,personalEmail,amount,generateDate,paymentDate,paymentIntentID,status]);
+    (sqlTnx,reg)=>{
+       console.log('The ${personalEmail} record has been added successful');
+    },
+    error=>{
+      console.log("error on adding a user " + error.message);
+    }});
+
 
   if (!permission.granted) {
     // Camera permissions are not granted yet
