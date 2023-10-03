@@ -17,12 +17,14 @@ export default function ReceiveScreen() {
   const [type, setType] = useState(CameraType.back);
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
-  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const [ initPaymentSheet, presentPaymentSheet ] = useStripe();
+  
   const [paymentStatus, setPaymentStatus] = useState({
     id: "ConfirmResponse",
     payment_id: 0,
     personal_email: "default",
     merchant_email: "default",
+    paymentIntentID:StripeInten.id,
     amount: 0,
     message: "default",
   });
@@ -57,16 +59,11 @@ export default function ReceiveScreen() {
     );
   }
 
+//create a Stripesheet baded on paymentIntentID from scanning QR Code
 const handleConfirm=async()=>{
-  //create a payment intent from payer
-   const response = await createPaymentIntent({amount:Math.floor(amount*100)});
-   console.log(response);
-   if (response.error) {
-    Alert.alert('Something went wrong');
-    return;
   //Initilize the payment sheet
   const initResponse = await initPaymentSheet({
-    merchantDisplayName: 'notJust.dev',
+    merchantDisplayName: {merchant_email},
     paymentIntentClientSecret: response.data.paymentIntent,
   });
   if (initResponse.error) {
@@ -76,6 +73,8 @@ const handleConfirm=async()=>{
   }
   //present the payment sheet on stripe
   const paymentResponse = await presentPaymentSheet();
+  Stripe.presentPaymentSheet(paymentIntent.id);
+  
 
   if (paymentResponse.error) {
     Alert.alert(
