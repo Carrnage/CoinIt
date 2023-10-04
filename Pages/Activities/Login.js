@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
     id: "AuthRequest",
    // email: "default",
     email:{setEmail},
-    password={setPassword},
+    password:{setPassword},
     //password: "default",
   });
 
