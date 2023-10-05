@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, Pressable, Text, TextInput, View } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 
@@ -26,13 +26,13 @@ export default function LoginScreen({ navigation }) {
     }
   }
   return (
-    <View style={[{flexDirection:'column'},styles.container]}>
-      <Text style={{fontSize:'xx-large', padding: ''}}>CoinIt</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
-      <View>
-        <Text style={{fontSize:'large'}}>Email</Text>
+      <View >
+        <Text style={styles.text}>Email</Text>
         <TextInput
-          style={{borderColor:'black', borderWidth: 2, padding: 10, borderRadius: 6}}
+          style={styles.textInput}
           autoComplete="email"
           textContentType="emailAddress"
           inputMode="email"
@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
         />
         <Text style={{fontSize:'large'}}>Password</Text>
         <TextInput
-          style={{borderColor:'black', borderWidth: 2, padding: 10, borderRadius: 6}}
+          style={styles.textInput}
           textContentType="password"
           secureTextEntry={true}
           enterKeyHint="enter"
@@ -57,10 +57,11 @@ export default function LoginScreen({ navigation }) {
             }))
           }
         />
-        <Button
-          title="Login"
+        <View style={styles.spacer}/>
+        <Pressable
+          style={styles.button}
           onPress={sendLogin}
-        />
+        ><Text style={styles.buttonText}>Login</Text></Pressable>
       </View>
     </View>
   );
