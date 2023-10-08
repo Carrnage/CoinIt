@@ -27,7 +27,7 @@ export default function SendScreen() {
   const[generateDate,setGenerateDate]=useState(null);
   const[paymentDate,setPaymentDate]=useState(null);
   const[status,setStatus]=useState(false);
-  const payment =require('./PaymentRoutes');
+//  const payment =require('./PaymentRoutes');
   const [paymentResponse, setPaymentResponse] = useState();
   
   
