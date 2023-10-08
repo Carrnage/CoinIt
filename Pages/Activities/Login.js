@@ -97,6 +97,12 @@ export default function LoginScreen({ navigation }) {
 					onPress={handleLogin}>
 					<Text style={styles.buttonText}>Login</Text>
 				</Pressable>
+				<Pressable
+					style={styles.button}
+					onPress={navigation.navigate("CoinIT - Registration")}>
+					<Text style={styles.buttonText}>Register</Text>
+				</Pressable>
+
 			</View>
 		</View>
 	);
