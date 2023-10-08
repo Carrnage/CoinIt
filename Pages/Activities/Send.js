@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { Login } from './Login';
 import * as SQLite from 'expo-sqlite';
 import QRCode from 'react-native-qrcode-svg';
+import Stripe from 'react-native-stripe-payments';
 
 const db = SQLite.openDatabase({
 	name: 'CoinIt.db',
@@ -16,6 +17,7 @@ const db = SQLite.openDatabase({
 export default function SendScreen() {
 	//define a stripe by PublishableKey
 	//const stripe = require("stripe")('sk_test_51NtqGXCWBcyMptLjhdWJxEPDagVO0OUZMiHNwh7NlgdwEwDQzTuvqNzeXHnbaFN0FWySlSWymr4E8Ved18ddX4LS002ZUcbm9P');
+  Stripe.setPublishableKey('sk_test_51NtqGXCWBcyMptLjhdWJxEPDagVO0OUZMiHNwh7NlgdwEwDQzTuvqNzeXHnbaFN0FWySlSWymr4E8Ved18ddX4LS002ZUcbm9P');
 
 	const [personalEmail, setPersonalEmail] = useState('');
 	const [merchantEmail, setMerchantEmail] = useState(Login.email);
@@ -23,8 +25,9 @@ export default function SendScreen() {
 	const [generateDate, setGenerateDate] = useState(null);
 	const [paymentDate, setPaymentDate] = useState(null);
 	const [status, setStatus] = useState(false);
-	//const payment =require('./PaymentRoutes');
+	const payment =require('./PaymentRoutes');
 	const [paymentResponse, setPaymentResponse] = useState();
+
 
 	const [paymentRequest, setPaymentRequest] = useState({
 		id: 'Payment Request',

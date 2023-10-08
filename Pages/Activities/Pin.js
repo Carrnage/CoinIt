@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 
 
 //Throws undefined function.
-const db=SQLite.opendatabase({
+const db=SQLite.openDatabase({
 	name:'CoinIt.db', 
 	location:'default',
   });
