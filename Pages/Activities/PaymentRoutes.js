@@ -1,5 +1,7 @@
 import Send from "./Send";
 
+//commented out for now as 'express' is undefined
+/*
 const express = require("express");
 //const router=express.Router();
 const app = express();
@@ -43,3 +45,4 @@ app.post("/intent", (req, res) => {
     })
 }
 });
+*/

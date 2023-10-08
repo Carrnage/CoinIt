@@ -6,10 +6,9 @@ import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { Camera, CameraType, BarCodeSettings } from "expo-camera";
-import {StripeProvider} from '@stripe/stripe-react-native';
-import { useStripe } from '@stripe/stripe-react-native';
-import Stripe from 'react-native-stripe-payments';
-import * as SQLite from 'expo-sqlite';
+import {StripeProvider, useStripe } from "@stripe/stripe-react-native";
+import Stripe from "react-native-stripe-payments";
+import * as SQLite from "expo-sqlite";
 
 const db = SQLite.openDatabase({ 
   name:'CoinIt.db', 

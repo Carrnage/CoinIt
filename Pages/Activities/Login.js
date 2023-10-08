@@ -76,7 +76,7 @@ const registerPress = async ()=> {
 		<View style={styles.container}>
 			<Text style={styles.title}>CoinIt</Text>
 			<StatusBar style="auto" />
-			<View>
+			<View style={styles.containerColumn}>
 				<Text style={styles.text}>Email</Text>
 				<TextInput
 					style={styles.textInput}
