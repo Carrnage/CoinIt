@@ -1,9 +1,14 @@
-/*import React from 'react';
+import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { View, TextInput, Button } from 'react-native';
-import { Text } from '@chakra-ui/react';
+import { Text, View, TextInput, Button } from 'react-native';
 
-export default function Registration() {
+const Stack = createNativeStackNavigator();
+
+
+export default function RegistrationScreen({ navigation }) {
 
   const[userID,setUserID]= useState(1);
   const[firstName,setFirstName] = useState('');
@@ -15,13 +20,14 @@ export default function Registration() {
   const[account,setAccount]=useState('');
 
 
+
   
     handleRegistration=()=>{
 
     }
 
   return (
-    <div>
+    <View>
       <Text fontSize='5xl'>Registration</Text>
       <View>
       <TextInput
@@ -70,7 +76,6 @@ export default function Registration() {
       />
       <Button title="Register" onPress={handleRegistration} />
     </View>
-    </div>
+    </View>
   )
 }
-*/

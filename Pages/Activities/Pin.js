@@ -1,52 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View, Button, TextInput, Pressable } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
+import * as SQLite from 'expo-sqlite';
+
+const Stack = createNativeStackNavigator();
+
+
+//Throws undefined function.
+const db=SQLite.opendatabase({
+	name:'CoinIt.db', 
+	location:'default',
+  });
 
 export default function PinScreen({ navigation }) {
-	const [pin, setPin] = useState([
-		{ pos: 1, digit: null },
-		{ pos: 2, digit: null },
-		{ pos: 3, digit: null },
-		{ pos: 4, digit: null },
-		{ pos: 5, digit: null },
-	]);
-	const [position, setPosition] = useState(1);
-	var fancypin = '#####';
+	const[pin, setPin] = useState('');
+	const[users,setUsers]=useState('');
+	const[message,setMessage]=useState("");	var fancypin = '#####';
 	const numberpress = (e) => {
 		if (Number.isInteger(e)) {
-			var currentpin = pin.find((pinpos) => {
-				return pinpos.pos === position;
-			});
-			currentpin.digit = e;
-			setPin(
-				pin.map((pin) => (pin.pos === position ? { ...pin, digit: e } : pin))
-			);
-			var newPosition = position;
-			newPosition++;
-			setPosition(position < 5 ? newPosition : position);
-			console.log(pin);
-			console.log(newPosition);
-			console.log(position);
+			
 		} else if ((e = 'delete')) {
-			var currentpin = pin.find((pinpos) => {
-				return pinpos.pos === position;
-			});
-			currentpin = e;
-			setPin(
-				pin.map((pin) => (pin.pos === position ? { ...pin, digit: null } : pin))
-			);
-			var newPosition = position;
-			newPosition--;
-			setPosition(position > 1 ? newPosition : position);
-			console.log(pin);
-			console.log(position);
+
 		}
 	};
-	/*
-	 */
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>CoinIt</Text>

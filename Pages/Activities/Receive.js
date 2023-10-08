@@ -6,6 +6,12 @@ import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { Camera, CameraType, BarCodeSettings } from "expo-camera";
+import * as SQLite from 'expo-sqlite';
+
+const db = SQLite.openDatabase({ 
+  name:'CoinIt.db', 
+  location:'default',
+  },)
 
 const Stack = createNativeStackNavigator();
 
@@ -13,11 +19,13 @@ export default function ReceiveScreen() {
   const [type, setType] = useState(CameraType.back);
   const [scanned, setScanned] = useState(false);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [ initPaymentSheet, presentPaymentSheet ] = useStripe();
   const [paymentStatus, setPaymentStatus] = useState({
     id: "ConfirmResponse",
     payment_id: 0,
     personal_email: "default",
     merchant_email: "default",
+    paymentIntentID:StripeInten.id,
     amount: 0,
     message: "default",
   });
@@ -53,6 +61,52 @@ export default function ReceiveScreen() {
       current === CameraType.back ? CameraType.front : CameraType.back
     );
   }
+  
+//create a Stripesheet baded on paymentIntentID from scanning QR Code
+const handleConfirm=async()=>{
+  //Initilize the payment sheet
+  const initResponse = await initPaymentSheet({
+    merchantDisplayName: {merchant_email},
+    paymentIntentClientSecret: response.data.paymentIntent,
+  });
+  if (initResponse.error) {
+    console.log(initResponse.error);
+    Alert.alert('Something went wrong');
+    return;
+  }
+  //present the payment sheet on stripe
+  const paymentResponse = await presentPaymentSheet();
+  Stripe.presentPaymentSheet(paymentIntent.id);
+  
+
+  if (paymentResponse.error) {
+    Alert.alert(
+      `Error code: ${paymentResponse.error.code}`,
+      paymentResponse.error.message
+    );
+    return;
+  }
+  //if payment is ok, create order
+}
+
+
+
+// createPaymentIntent: builder.mutation({
+//   query: (data) => ({
+//     url: 'payments/intents',
+//     method: 'POST',
+//     body: data,
+//   }),
+// }),
+
+// createOrder: builder.mutation({
+//   query: (newOrder) => ({
+//     url: 'orders',
+//     method: 'POST',
+//     body: newOrder,
+//   }),
+// }),
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
