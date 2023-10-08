@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Button, Pressable, Text, TextInput, View } from "react-native";
 import { styles } from "../../Stylesheets/AppStyleLight";
 import { useState } from "react";
+import { SQLiteDatabase } from "react-native-sqlite-storage";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +45,7 @@ export default function LoginScreen({ navigation }) {
             }))
           }
         />
-        <Text style={{fontSize:'large'}}>Password</Text>
+        <Text style={styles.spacer}>Password</Text>
         <TextInput
           style={styles.textInput}
           textContentType="password"

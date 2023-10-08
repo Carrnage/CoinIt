@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
 		flex: 1,
 	},
 	title: {
-		fontSize: 'xx-large',
+		fontSize: 40,
 		textShadowColor: 'grey',
 		textShadowRadius: 5,
 		fontWeight: 'bold',
@@ -37,10 +37,10 @@ export const styles = StyleSheet.create({
 		padding: 6,
 	},
 	text: {
-		fontSize: 'large',
+		fontSize: 14,
 	},
 	buttonText: {
-		fontSize: 'large',
+		fontSize: 14,
 		color: 'white',
 	},
 });
