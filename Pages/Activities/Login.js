@@ -67,6 +67,9 @@ export default function LoginScreen({ navigation }) {
       navigation.navigate("CoinIT - Registration")
     }
     }
+const registerPress = async ()=> {
+	navigation.navigate("CoinIT - Registration")
+}
 
 
     return (
@@ -99,7 +102,7 @@ export default function LoginScreen({ navigation }) {
 				</Pressable>
 				<Pressable
 					style={styles.button}
-					onPress={navigation.navigate("CoinIT - Registration")}>
+					onPress={registerPress}>
 					<Text style={styles.buttonText}>Register</Text>
 				</Pressable>
 
