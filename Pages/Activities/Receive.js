@@ -16,7 +16,7 @@ export default function ReceiveScreen() {
   const [paymentStatus, setPaymentStatus] = useState({
     id: "ConfirmResponse",
     payment_id: 0,
-    personal_email: "default",
+    sender_email: "default",
     merchant_email: "default",
     amount: 0,
     message: "default",
@@ -57,8 +57,8 @@ export default function ReceiveScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>CoinIt</Text>
       <StatusBar style="auto" />
-      <View>
-        <View style={{flex:0.6}}>
+      <View style={{flex:1,width:"100%"}}>
+        <View style={{flex:0.6, width: "80%"}}>
           <Camera
             style={styles.camera}
             type={type}
@@ -67,7 +67,7 @@ export default function ReceiveScreen() {
             }}
             onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           >
-            <View style={styles.buttonContainer}>
+            <View>
               <TouchableOpacity
                 style={styles.button}
                 onPress={toggleCameraType}
