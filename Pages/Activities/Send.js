@@ -42,6 +42,7 @@ export default function SendScreen() {
 		receiver_email: 'defaultReceiver',
 		amount: 0.0,
 		payment_method: 'default',
+		message: 'default',
 		status: 0,
 	});
 	const [qrcode, setqrcode] = useState(JSON.stringify(paymentRequest));
@@ -159,7 +160,9 @@ const StripeIntent = async(req,res)=>{
 			...paymentRequest,
 			status: 1,
 		}));
+		setqrcode(JSON.stringify(paymentRequest));
 		console.log(qrcode);
+		console.log(paymentRequest);
 	}
 
 	return (
@@ -171,16 +174,17 @@ const StripeIntent = async(req,res)=>{
 					<QRCode
 						style={{ flex: 0.5 }}
 						value={qrcode}
+						size={300}
 					/>
 				)}
 				<Text>Sender Email</Text>
 				<TextInput
-					disabled={true}
+					disabled="true"
 					autoComplete="email"
 					textContentType="emailAddress"
 					inputMode="email"
 					enterKeyHint="next"
-					defaultValue={setPaymentRequest.sender_email}
+					defaultValue={paymentRequest.sender_email}
 				/>
 				<Text>Receiver email</Text>
 				<TextInput
@@ -188,13 +192,23 @@ const StripeIntent = async(req,res)=>{
 					textContentType="emailAddress"
 					inputMode="email"
 					enterKeyHint="next"
-					onChangeText={setPaymentRequest.receiver_email}
+					onChangeText={(setEmail) =>
+						setPaymentRequest((paymentRequest) => ({
+							...paymentRequest,
+							receiver_email: setEmail,
+						}))
+					}
 				/>
 				<Text>Amount</Text>
 				<TextInput
 					keyboardType="decimal-pad"
 					inputMode="decimal"
-					onChangeText={setPaymentRequest.amount}
+					onChangeText={(newAmount) =>
+						setPaymentRequest((paymentRequest) => ({
+							...paymentRequest,
+							amount: newAmount,
+						}))
+					}
 				/>
 				<Button
 					title="Send"
