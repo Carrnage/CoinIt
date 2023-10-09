@@ -28,7 +28,7 @@ export default function ReceiveScreen() {
     payment_id: 0,
     personal_email: "default",
     merchant_email: "default",
-    paymentIntentID:StripeInten.id,
+    paymentIntentID:StripeIntent.id,
     amount: 0,
     message: "default",
   });
