@@ -5,6 +5,7 @@ import { Text, View, Pressable } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
 import * as SQLite from 'expo-sqlite';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,95 +34,95 @@ export default function PinScreen({ navigation }) {
 			<Text>{fancypin}</Text>
 			<View>
 				<Text>Pin</Text>
-				<View style={styles.button[{ flexDirection: 'column' }]}>
+				<View style={styles.container[{ flexDirection: 'column' }]}>
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							onPress={() => numberpress(7)}>
-							<Text style={styles.buttonText}>7</Text>
+							<Text style={styles.pinText}>7</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="8"
 							onPress={() => numberpress(8)}>
-							<Text style={styles.buttonText}>8</Text>
+							<Text style={styles.pinText}>8</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="9"
 							onPress={() => numberpress(9)}>
-							<Text style={styles.buttonText}>9</Text>
+							<Text style={styles.pinText}>9</Text>
 						</Pressable>
 					</View>
 					<View style={styles.spacer} />
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="4"
 							onPress={() => numberpress(4)}>
-							<Text style={styles.buttonText}>4</Text>
+							<Text style={styles.pinText}>4</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="5"
 							onPress={() => numberpress(5)}>
-							<Text style={styles.buttonText}>5</Text>
+							<Text style={styles.pinText}>5</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="6"
 							onPress={() => numberpress(6)}>
-							<Text style={styles.buttonText}>6</Text>
+							<Text style={styles.pinText}>6</Text>
 						</Pressable>
 					</View>
 					<View style={styles.spacer} />
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="1"
 							onPress={() => numberpress(1)}>
-							<Text style={styles.buttonText}>1</Text>
+							<Text style={styles.pinText}>1</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="2"
 							onPress={() => numberpress(2)}>
-							<Text style={styles.buttonText}>2</Text>
+							<Text style={styles.pinText}>2</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="3"
 							onPress={() => numberpress(3)}>
-							<Text style={styles.buttonText}>3</Text>
+							<Text style={styles.pinText}>3</Text>
 						</Pressable>
 					</View>
 					<View style={styles.spacer} />
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="<"
 							onPress={() => numberpress('delete')}>
-							<Text style={styles.buttonText}>d</Text>
+							<MaterialCommunityIcons size={20} color="white" name="backspace-outline"/>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="0"
 							onPress={() => numberpress(0)}>
-							<Text style={styles.buttonText}>0</Text>
+							<Text style={styles.pinText}>0</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="="
 							onPress={() => navigation.navigate('CoinIt - Home')}>
-							<Text style={styles.buttonText}>=</Text>
+							<Text style={styles.pinText}>=</Text>
 						</Pressable>
 					</View>
 				</View>

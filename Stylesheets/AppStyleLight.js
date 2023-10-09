@@ -20,6 +20,10 @@ export const styles = StyleSheet.create({
 		margin: 5,
 		flexDirection: 'column',
 	},
+	titleBox: {
+		flex: 0.5,
+		justifyContent: 'center'
+	},
 	textInput: {
 		borderColor: 'black',
 		borderWidth: 2,
@@ -36,12 +40,19 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: 'dodgerblue',
 	},
+	pinButton: {
+		borderColor: 'black',
+		borderWidth: 2,
+		padding: 6,
+		borderRadius: 6,
+		alignItems: 'center',
+		backgroundColor: 'dodgerblue',
+	},
 	camera: {
 		flex: 1,
 	},
 	title: {
 		justifyContent: 'center',
-		flex: 0.5,
 		fontSize: 40,
 		textShadowColor: 'grey',
 		textShadowRadius: 5,
@@ -57,4 +68,9 @@ export const styles = StyleSheet.create({
 		fontSize: 14,
 		color: 'white',
 	},
+	pinText: {
+		fontSize: 30,
+		color: 'white',
+	},
+
 });
