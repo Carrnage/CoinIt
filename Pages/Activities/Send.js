@@ -173,14 +173,6 @@ const StripeIntent = async(req,res)=>{
 						value={qrcode}
 					/>
 				)}
-				<Text>Receiver email</Text>
-				<TextInput
-					autoComplete="email"
-					textContentType="emailAddress"
-					inputMode="email"
-					enterKeyHint="next"
-					onChangeText={setPaymentRequest.receiver_email}
-				/>
 				<Text>Sender Email</Text>
 				<TextInput
 					disabled={true}
@@ -189,6 +181,14 @@ const StripeIntent = async(req,res)=>{
 					inputMode="email"
 					enterKeyHint="next"
 					defaultValue={setPaymentRequest.sender_email}
+				/>
+				<Text>Receiver email</Text>
+				<TextInput
+					autoComplete="email"
+					textContentType="emailAddress"
+					inputMode="email"
+					enterKeyHint="next"
+					onChangeText={setPaymentRequest.receiver_email}
 				/>
 				<Text>Amount</Text>
 				<TextInput
