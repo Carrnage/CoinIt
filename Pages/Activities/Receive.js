@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TouchableOpacity } from 'react-native';
+import { Text, View, Button, TouchableOpacity, Pressable } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -59,6 +59,32 @@ export default function ReceiveScreen() {
 			current === CameraType.back ? CameraType.front : CameraType.back
 		);
 	}
+	function confirmPress() {
+		setScanned(false);
+		alert('Payment Confirmed');
+		setRequestPayment({
+			id: 'Payment Request',
+			payment_id: 0,
+			sender_email: 'defaultSender',
+			receiver_email: 'defaultReceiver',
+			amount: 0.0,
+			message: 'default',
+			status: 0,
+		});
+	}
+	function declinePress() {
+		setScanned(false);
+		alert('Payment Cancelled');
+		setRequestPayment({
+			id: 'Payment Request',
+			payment_id: 0,
+			sender_email: 'defaultSender',
+			receiver_email: 'defaultReceiver',
+			amount: 0.0,
+			message: 'default',
+			status: 0,
+		});
+	}
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>CoinIt</Text>
@@ -91,14 +117,24 @@ export default function ReceiveScreen() {
 					<View style={{ flex: 0.3 }}>
 						<Text style={styles.text}>Sender Email</Text>
 						<Text style={styles.text}>{requestPayment.sender_email}</Text>
-            <Text style={styles.text}>Receiver Email</Text>
+						<Text style={styles.text}>Receiver Email</Text>
 						<Text style={styles.text}>{requestPayment.receiver_email}</Text>
 						<Text style={styles.text}>Amount</Text>
 						<Text style={styles.text}>${requestPayment.amount}</Text>
-            <Text style={styles.text}>Message</Text>
+						<Text style={styles.text}>Message</Text>
 						<Text style={styles.text}>{requestPayment.message}</Text>
-						<Button title="Confirm" />
-						<Button title="Decline" />
+						<Pressable
+							style={styles.button}
+							title="Confirm"
+							onPress={confirmPress}>
+							<Text style={styles.buttonText}>Confirm</Text>
+						</Pressable>
+						<Pressable
+							style={styles.button}
+							title="Decline"
+							onPress={declinePress}>
+							<Text style={styles.buttonText}>Decline</Text>
+						</Pressable>
 					</View>
 				)}
 			</View>

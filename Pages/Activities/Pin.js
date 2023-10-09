@@ -5,26 +5,45 @@ import { Text, View, Pressable } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
 import * as SQLite from 'expo-sqlite';
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
 
-
 //Throws undefined function.
-const db=SQLite.openDatabase({
-	name:'CoinIt.db', 
-	location:'default',
-  });
+const db = SQLite.openDatabase({
+	name: 'CoinIt.db',
+	location: 'default',
+});
 
 export default function PinScreen({ navigation }) {
-	const[pin, setPin] = useState('');
-	const[users,setUsers]=useState('');
-	const[message,setMessage]=useState("");	var fancypin = '#####';
+	const [pin, setPin] = useState('');
+	const [users, setUsers] = useState('');
+	const [message, setMessage] = useState('');
+	var fancypin = '#####';
 	const numberpress = (e) => {
 		if (Number.isInteger(e)) {
-			
-		} else if ((e = 'delete')) {
-
+			console.log(e);
+			const test = toString(pin);
+			console.log(test);
+			if (pin.length < 5) {
+				console.log('step2');
+				if (toString(pin.length) == 0) {
+					setPin(e);
+					console.log(e);
+					console.log(pin);
+				} else {
+					setPin((pin) => pin + e);
+					console.log(e);
+					console.log(pin);
+				}
+			}
+			console.log('how?');
+			console.log(test);
+		} else if (e == 'delete') {
+			console.log('delete');
+		} else {
+			alert('UNREACHABLE STATE Pin.JS NUMBERPRESS');
+			console.log('UNREACHABLE STATE Pin.JS NUMBERPRESS');
 		}
 	};
 	return (
@@ -108,7 +127,11 @@ export default function PinScreen({ navigation }) {
 							style={styles.pinButton}
 							title="<"
 							onPress={() => numberpress('delete')}>
-							<MaterialCommunityIcons size={20} color="white" name="backspace-outline"/>
+							<MaterialCommunityIcons
+								size={20}
+								color="white"
+								name="backspace-outline"
+							/>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable

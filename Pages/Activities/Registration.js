@@ -94,11 +94,12 @@ export default function RegistrationScreen({ navigation }) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Text fontSize="5xl">Registration</Text>
-			<ScrollView contentContainerStyle={styles.containerColumn}>
-				<Text style={styles.text}></Text>
+		<ScrollView Style={styles.containerScroll}>
+			<Text style={styles.title}>Registration</Text>
+			<View style={styles.container}>
+				<Text style={styles.text}>ID</Text>
 				<TextInput
+					disabled={true}
 					style={styles.textInput}
 					placeholder=""
 					value={userID}
@@ -165,7 +166,7 @@ export default function RegistrationScreen({ navigation }) {
 					style={styles.button}>
 					<Text style={styles.buttonText}>Cancel</Text>
 				</Pressable>
-			</ScrollView>
-		</View>
+			</View>
+		</ScrollView>
 	);
 }
