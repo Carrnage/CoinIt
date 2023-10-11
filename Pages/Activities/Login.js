@@ -5,6 +5,7 @@ import { Pressable, Text, TextInput, View } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState, useEffect } from 'react';
 import * as SQLite from 'expo-sqlite';
+import { Button } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,14 +79,18 @@ export default function LoginScreen({ navigation }) {
 		     console.log("debug log in if seen outside test build PANIC");
 		     navigation.navigate("CoinIt - Pin");
 }
-	const registerPress = async () => {
-		navigation.navigate('CoinIT - Registration');
-	};
+const registerPress = async () => {
+	navigation.navigate('CoinIT - Registration');
+};
+const TESTPAGE = async () => {
+	navigation.navigate("CoinIt - TESTPAGE");
+};
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleBox}>
 				<Text style={styles.title}>CoinIt</Text>
+				<Button style={styles.button} title='TESTPAGE' onPress={TESTPAGE}><Text>TESTPAGE</Text></Button>
 			</View>
 			<StatusBar style="auto" />
 			<View style={styles.containerColumn}>
