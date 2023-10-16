@@ -99,7 +99,8 @@ export default function RegistrationScreen({ navigation }) {
 			<View style={styles.container}>
 				<Text style={styles.text}>ID</Text>
 				<TextInput
-					disabled={true}
+					editable={false}
+					selectTextOnFocus={false}
 					style={styles.textInput}
 					placeholder=""
 					value={userID}

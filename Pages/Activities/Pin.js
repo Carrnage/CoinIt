@@ -20,6 +20,7 @@ export default function PinScreen({ navigation }) {
 	const [users, setUsers] = useState('');
 	const [message, setMessage] = useState('');
 	var fancypin = '#####';
+	var fancypin2 = '*****';
 	const numberpress = (e) => {
 		if (Number.isInteger(e)) {
 			console.log(e);
@@ -29,28 +30,42 @@ export default function PinScreen({ navigation }) {
 				console.log('step2');
 				if (toString(pin.length) == 0) {
 					setPin(e);
-					console.log(e);
 					console.log(pin);
 				} else {
 					setPin((pin) => pin + e);
-					console.log(e);
 					console.log(pin);
 				}
 			}
-			console.log('how?');
-			console.log(test);
+			console.log('Pin length >= 5');
+			console.log(pin);
 		} else if (e == 'delete') {
+			setPin(pin.substring(0, pin.length - 1));
 			console.log('delete');
 		} else {
 			alert('UNREACHABLE STATE Pin.JS NUMBERPRESS');
 			console.log('UNREACHABLE STATE Pin.JS NUMBERPRESS');
 		}
 	};
+
+	function enterpin () {
+		if(pin=='00000')
+		{
+			navigation.navigate('CoinIt - Home')
+			setPin("")
+		}
+		else{
+			console.log('debug pin is 00000')
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>CoinIt</Text>
 			<StatusBar style="auto" />
-			<Text>{fancypin}</Text>
+			<Text style={styles.title}>
+				{fancypin2.substring(0, pin.length)}
+				{fancypin.substring(pin.length, 5)}
+			</Text>
 			<View>
 				<Text>Pin</Text>
 				<View style={styles.container[{ flexDirection: 'column' }]}>
@@ -144,7 +159,7 @@ export default function PinScreen({ navigation }) {
 						<Pressable
 							style={styles.pinButton}
 							title="="
-							onPress={() => navigation.navigate('CoinIt - Home')}>
+							onPress={enterpin}>
 							<Text style={styles.pinText}>=</Text>
 						</Pressable>
 					</View>

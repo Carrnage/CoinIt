@@ -179,7 +179,8 @@ const StripeIntent = async(req,res)=>{
 				)}
 				<Text>Sender Email</Text>
 				<TextInput
-					disabled="true"
+					editable={false}
+					selectTextOnFocus={false}
 					autoComplete="email"
 					textContentType="emailAddress"
 					inputMode="email"

@@ -67,9 +67,10 @@ export default function LoginScreen({ navigation }) {
 			);
 			if (user) {
 				navigation.navigate('CoinIt - Pin');
+				setEmail('')
+				setPassword('')
 			} else {
 				setMessage('Invalid username or password. Please logon!');
-				navigation.navigate('CoinIT - Registration');
 			}
 		} else {
 			setMessage('Please enter a Username and Password');
@@ -77,6 +78,8 @@ export default function LoginScreen({ navigation }) {
 	};
 	const debug = async ()=> {
 		     console.log("debug log in if seen outside test build PANIC");
+			 setEmail('')
+			 setPassword('')
 		     navigation.navigate("CoinIt - Pin");
 }
 const registerPress = async () => {
@@ -102,6 +105,7 @@ const TESTPAGE = async () => {
 					inputMode="email"
 					enterKeyHint="next"
 					onChangeText={setEmail}
+					value={email}
 				/>
 				<Text style={styles.spacer}>Password</Text>
 				<TextInput
@@ -110,6 +114,7 @@ const TESTPAGE = async () => {
 					secureTextEntry={true}
 					enterKeyHint="enter"
 					onChangeText={setPassword}
+					value={password}
 				/>
 				<View style={styles.spacer} />
 				<Pressable
