@@ -37,22 +37,22 @@ export default function PinScreen({ navigation }) {
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
 							style={styles.button}
-							onPress={() => numberpress(7)}>
-							<Text style={styles.buttonText}>7</Text>
+							onPress={() => numberpress(1)}>
+							<Text style={styles.buttonText}>1</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
 							style={styles.button}
-							title="8"
-							onPress={() => numberpress(8)}>
-							<Text style={styles.buttonText}>8</Text>
+							title="2"
+							onPress={() => numberpress(2)}>
+							<Text style={styles.buttonText}>2</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
 							style={styles.button}
-							title="9"
-							onPress={() => numberpress(9)}>
-							<Text style={styles.buttonText}>9</Text>
+							title="3"
+							onPress={() => numberpress(3)}>
+							<Text style={styles.buttonText}>3</Text>
 						</Pressable>
 					</View>
 					<View style={styles.spacer} />
@@ -82,23 +82,23 @@ export default function PinScreen({ navigation }) {
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
 							style={styles.button}
-							title="1"
-							onPress={() => numberpress(1)}>
-							<Text style={styles.buttonText}>1</Text>
+							title="7"
+							onPress={() => numberpress(7)}>
+							<Text style={styles.buttonText}>7</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
 							style={styles.button}
-							title="2"
-							onPress={() => numberpress(2)}>
-							<Text style={styles.buttonText}>2</Text>
+							title="8"
+							onPress={() => numberpress(8)}>
+							<Text style={styles.buttonText}>8</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
 							style={styles.button}
-							title="3"
-							onPress={() => numberpress(3)}>
-							<Text style={styles.buttonText}>3</Text>
+							title="9"
+							onPress={() => numberpress(9)}>
+							<Text style={styles.buttonText}>9</Text>
 						</Pressable>
 					</View>
 					<View style={styles.spacer} />
@@ -121,7 +121,7 @@ export default function PinScreen({ navigation }) {
 							style={styles.button}
 							title="="
 							onPress={() => navigation.navigate('CoinIt - Home')}>
-							<Text style={styles.buttonText}>=</Text>
+							<Text style={styles.buttonText}>&gt;</Text>
 						</Pressable>
 					</View>
 				</View>
