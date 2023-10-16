@@ -9,6 +9,7 @@ import ReceiveScreen from "./Pages/Activities/Receive";
 import TESTPAGE1 from "./Pages/Activities/TESTPAGE";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import TransactionHistory from "./Pages/Activities/History";
 
 const Stack = createNativeStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -69,6 +70,7 @@ export default function App() {
         <Stack.Screen name="CoinIt - Pin" component={PinScreen} />
         <Stack.Screen name="CoinIt - Home" component={Hometabs} />
         <Stack.Screen name="CoinIt - TESTPAGE" component={TESTPAGE1} />
+        <Stack.Screen name="CoinIt - Transactions" component={TransactionHistory} />        
       </Stack.Navigator>
     </NavigationContainer>
   );
