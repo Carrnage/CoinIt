@@ -1,11 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View, Button } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState, useEffect } from 'react';
 import * as SQLite from 'expo-sqlite';
-import { Button } from 'react-native-paper';
 
 const Stack = createNativeStackNavigator();
 

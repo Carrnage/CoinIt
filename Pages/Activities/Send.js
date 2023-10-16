@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Login } from './Login';
 import * as SQLite from 'expo-sqlite';
 import QRCode from 'react-native-qrcode-svg';
-import Stripe from 'react-native-stripe-payments';
+//import Stripe from 'react-native-stripe-payments';
 
 const db = SQLite.openDatabase({
 	name: 'CoinIt.db',
