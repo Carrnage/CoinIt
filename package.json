@@ -11,10 +11,10 @@
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
     "@emotion/react": "^11.11.1",
-    "@expo/webpack-config": "^18.0.1",
     "@react-navigation/material-bottom-tabs": "^6.2.16",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
+    "@stripe/stripe-react-native": "0.23.3",
     "expo": "~48.0.18",
     "expo-barcode-scanner": "~12.3.2",
     "expo-camera": "~13.2.1",
@@ -29,8 +29,7 @@
     "react-native-sqlite-storage": "^6.0.1",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10",
-    "stripe": "^13.7.0",
-    "@stripe/stripe-react-native": "0.23.3"
+    "stripe": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
