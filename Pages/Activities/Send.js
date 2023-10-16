@@ -17,38 +17,48 @@ const db = SQLite.openDatabase({
 export default function SendScreen() {
 	//define a stripe by PublishableKey
 	//const stripe = require("stripe")('sk_test_51NtqGXCWBcyMptLjhdWJxEPDagVO0OUZMiHNwh7NlgdwEwDQzTuvqNzeXHnbaFN0FWySlSWymr4E8Ved18ddX4LS002ZUcbm9P');
-  Stripe.setPublishableKey('sk_test_51NtqGXCWBcyMptLjhdWJxEPDagVO0OUZMiHNwh7NlgdwEwDQzTuvqNzeXHnbaFN0FWySlSWymr4E8Ved18ddX4LS002ZUcbm9P');
+	//  Stripe.setPublishableKey('sk_test_51NtqGXCWBcyMptLjhdWJxEPDagVO0OUZMiHNwh7NlgdwEwDQzTuvqNzeXHnbaFN0FWySlSWymr4E8Ved18ddX4LS002ZUcbm9P');
 
-	const [personalEmail, setPersonalEmail] = useState('');
-	const [merchantEmail, setMerchantEmail] = useState(Login.email);
+	/*	try {
+		const [senderEmail, setSenderEmail] = useState(Login.email);
+	} catch (error) {
+		console.log('Login.email is null expected result of using debug entry');
+	}
+	if (senderEmail=null){
+		const [senderEmail, setSenderEmail] = useState('Default@debug.com');
+	}
+	const [receiverEmail, setReceiverEmail] = useState('');
 	const [amount, setAmount] = useState(0);
 	const [generateDate, setGenerateDate] = useState(null);
 	const [paymentDate, setPaymentDate] = useState(null);
-	const [status, setStatus] = useState(false);
-	const payment =require('./PaymentRoutes');
+	const [status, setStatus] = useState(0);
+	const payment = require('./PaymentRoutes');
 	const [paymentResponse, setPaymentResponse] = useState();
-
+*/
 
 	const [paymentRequest, setPaymentRequest] = useState({
 		id: 'Payment Request',
-		personal_email: 'default',
-		merchant_email: 'default',
+		sender_email: 'defaultSender',
+		receiver_email: 'defaultReceiver',
 		amount: 0.0,
 		payment_method: 'default',
+		message: 'default',
 		status: 0,
 	});
 	const [qrcode, setqrcode] = useState(JSON.stringify(paymentRequest));
-
+	//here there be commented broken code
+	/*
 	//create a database table and insert data
 	useEffect(() => {
 		createPaymentTable();
 	}, []);
-
+*/
+	/*
 	//create a table named payment
 	async function createPaymentTable() {
 		await db.transaction(async (tx) => {
 			await tx.executeSql(
-				'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, MerchantEmail varchar(30), PersonalEmail varchar(30), Amount decimal(5,2), CreateDate datetime, PaymentDate datetime, PaymentID varchar(30), Status varchar(10))',
+				'CREATE TABLE IF NOT EXISTS Payment (id INTEGER PRIMARY KEY AUTOINCREMENT, SenderEmail varchar(30), ReceiverEmail varchar(30), Amount decimal(5,2), CreateDate datetime, PaymentDate datetime, PaymentID varchar(30), Status varchar(10))',
 				[],
 				(sqlTnx, reg) => {
 					console.log('Payment Table has been created successful');
@@ -59,11 +69,13 @@ export default function SendScreen() {
 			);
 		});
 	}
+*/
 	//insert a new payment record to database
+	/*
 	const AddPayment = () => {
 		if (
-			personalEmail.length == 0 ||
-			merchantEmail.length == 0 ||
+			receiverEmail.length == 0 ||
+			senderEmail.length == 0 ||
 			amount == null ||
 			generateDate.length == 0
 		) {
@@ -73,10 +85,10 @@ export default function SendScreen() {
 
 		db.transaction((tx) => {
 			tx.executeSql(
-				'INSERT INTO Users (MerchantEmail, PersonalEmail, Amount, CreateDate, PaymentDate, PaymentID, Status) VALUES (?,?,?,?,?,?,?)',
+				'INSERT INTO Users (SenderEmail, ReceiverEmail, Amount, CreateDate, PaymentDate, PaymentID, Status) VALUES (?,?,?,?,?,?,?)',
 				[
-					merchantEmail,
-					personalEmail,
+					senderEmail,
+					receiverEmail,
 					amount,
 					generateDate,
 					paymentDate,
@@ -85,14 +97,14 @@ export default function SendScreen() {
 				]
 			);
 			(sqlTnx, reg) => {
-				console.log('The ${personalEmail} record has been added successful');
+				console.log('The ${ReceiverEmail} record has been added successful');
 			},
 				(error) => {
 					console.log('error on adding a user ' + error.message);
 				};
 		});
 	};
-
+*/
 	//starting Stripe function
 	//create a stripe intent
 	/*
@@ -118,6 +130,7 @@ const StripeIntent = async(req,res)=>{
    }
 }
 */
+	/*
 	//get current date for create a payment in database
 	const getDate = () => {
 		const generate = new Date();
@@ -132,19 +145,22 @@ const StripeIntent = async(req,res)=>{
 		setPaymentDate(formattedTime);
 	};
 
-	const setQRCode = () => {
-		JSON.stringify(PaymentResponse);
+	const setqr = () => {
+		setPaymentRequest(paymentRequest.sender_email=senderEmail,paymentRequest.receiver_email=receiverEmail,paymentRequest.amount=amount)
+		console.log(paymentRequest);
+		setStatus(1)
+		JSON.stringify(PaymentRequest);
 	};
-
+*/
 	function onSend() {
-		AddPayment();
-		StripeIntent();
-		setQRCode();
-		// setPaymentRequest((paymentRequest) => ({
-		//   ...paymentRequest,
-		//   status: 1,
-		// }));
-
+		//AddPayment();
+		//				StripeIntent();
+		//		setqr();
+		setPaymentRequest((paymentRequest) => ({
+			...paymentRequest,
+			status: 1,
+		}));
+		setqrcode(JSON.stringify(paymentRequest));
 		console.log(qrcode);
 		console.log(paymentRequest);
 	}
@@ -158,18 +174,19 @@ const StripeIntent = async(req,res)=>{
 					<QRCode
 						style={{ flex: 0.5 }}
 						value={qrcode}
+						size={300}
 					/>
 				)}
-				<Text>Personal email</Text>
+				<Text>Sender Email</Text>
 				<TextInput
-					disabled={true}
+					disabled="true"
 					autoComplete="email"
 					textContentType="emailAddress"
 					inputMode="email"
 					enterKeyHint="next"
-					defaultValue={paymentRequest.personal_email}
+					defaultValue={paymentRequest.sender_email}
 				/>
-				<Text>Merchant Email</Text>
+				<Text>Receiver email</Text>
 				<TextInput
 					autoComplete="email"
 					textContentType="emailAddress"
@@ -178,7 +195,7 @@ const StripeIntent = async(req,res)=>{
 					onChangeText={(setEmail) =>
 						setPaymentRequest((paymentRequest) => ({
 							...paymentRequest,
-							merchant_email: setEmail,
+							receiver_email: setEmail,
 						}))
 					}
 				/>

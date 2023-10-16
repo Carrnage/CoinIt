@@ -6,6 +6,7 @@ import PinScreen from "./Pages/Activities/Pin";
 import HomeScreen from "./Pages/Activities/Home";
 import SendScreen from "./Pages/Activities/Send";
 import ReceiveScreen from "./Pages/Activities/Receive";
+import TESTPAGE1 from "./Pages/Activities/TESTPAGE";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -67,6 +68,7 @@ export default function App() {
         <Stack.Screen name="CoinIT - Registration" component={RegistrationScreen} />
         <Stack.Screen name="CoinIt - Pin" component={PinScreen} />
         <Stack.Screen name="CoinIt - Home" component={Hometabs} />
+        <Stack.Screen name="CoinIt - TESTPAGE" component={TESTPAGE1} />
       </Stack.Navigator>
     </NavigationContainer>
   );

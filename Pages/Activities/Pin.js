@@ -5,25 +5,45 @@ import { Text, View, Pressable } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
 import * as SQLite from 'expo-sqlite';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
 
-
 //Throws undefined function.
-const db=SQLite.openDatabase({
-	name:'CoinIt.db', 
-	location:'default',
-  });
+const db = SQLite.openDatabase({
+	name: 'CoinIt.db',
+	location: 'default',
+});
 
 export default function PinScreen({ navigation }) {
-	const[pin, setPin] = useState('');
-	const[users,setUsers]=useState('');
-	const[message,setMessage]=useState("");	var fancypin = '#####';
+	const [pin, setPin] = useState('');
+	const [users, setUsers] = useState('');
+	const [message, setMessage] = useState('');
+	var fancypin = '#####';
 	const numberpress = (e) => {
 		if (Number.isInteger(e)) {
-			
-		} else if ((e = 'delete')) {
-
+			console.log(e);
+			const test = toString(pin);
+			console.log(test);
+			if (pin.length < 5) {
+				console.log('step2');
+				if (toString(pin.length) == 0) {
+					setPin(e);
+					console.log(e);
+					console.log(pin);
+				} else {
+					setPin((pin) => pin + e);
+					console.log(e);
+					console.log(pin);
+				}
+			}
+			console.log('how?');
+			console.log(test);
+		} else if (e == 'delete') {
+			console.log('delete');
+		} else {
+			alert('UNREACHABLE STATE Pin.JS NUMBERPRESS');
+			console.log('UNREACHABLE STATE Pin.JS NUMBERPRESS');
 		}
 	};
 	return (
@@ -33,7 +53,7 @@ export default function PinScreen({ navigation }) {
 			<Text>{fancypin}</Text>
 			<View>
 				<Text>Pin</Text>
-				<View style={styles.button[{ flexDirection: 'column' }]}>
+				<View style={styles.container[{ flexDirection: 'column' }]}>
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
 							style={styles.button}
@@ -104,21 +124,62 @@ export default function PinScreen({ navigation }) {
 					<View style={styles.spacer} />
 					<View style={[{ flexDirection: 'row' }]}>
 						<Pressable
+							style={styles.pinButton}
+							title="4"
+							onPress={() => numberpress(4)}>
+							<Text style={styles.pinText}>4</Text>
+						</Pressable>
+						<View style={styles.spacer} />
+						<Pressable
+							style={styles.pinButton}
+							title="5"
+							onPress={() => numberpress(5)}>
+							<Text style={styles.pinText}>5</Text>
+						</Pressable>
+						<View style={styles.spacer} />
+						<Pressable
+							style={styles.pinButton}
+							title="6"
+							onPress={() => numberpress(6)}>
+							<Text style={styles.pinText}>6</Text>
+						</Pressable>
+					</View>
+					<View style={styles.spacer} />
+					<View style={[{ flexDirection: 'row' }]}>
+						<Pressable
+							style={styles.button}
+							title="7"
+							onPress={() => numberpress(7)}>
+							<Text style={styles.buttonText}>7</Text>
+						</Pressable>
+						<View style={styles.spacer} />
+						<Pressable
+							style={styles.button}
+							title="8"
+							onPress={() => numberpress(8)}>
+							<Text style={styles.buttonText}>8</Text>
+						</Pressable>
+						<View style={styles.spacer} />
+						<Pressable
 							style={styles.button}
 							title="<"
 							onPress={() => numberpress('delete')}>
-							<Text style={styles.buttonText}>d</Text>
+							<MaterialCommunityIcons
+								size={20}
+								color="white"
+								name="backspace-outline"
+							/>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="0"
 							onPress={() => numberpress(0)}>
-							<Text style={styles.buttonText}>0</Text>
+							<Text style={styles.pinText}>0</Text>
 						</Pressable>
 						<View style={styles.spacer} />
 						<Pressable
-							style={styles.button}
+							style={styles.pinButton}
 							title="="
 							onPress={() => navigation.navigate('CoinIt - Home')}>
 							<Text style={styles.buttonText}>&gt;</Text>
