@@ -1,0 +1,20 @@
+--create a project
+npx create-expo-app XX
+npm install -g expo-cli
+npm install -g react-native @lastest
+npx expo install @stripe/stripe-react-native@0.23.3 react-native@0.71.14
+npm i
+
+--build envirment for sqlite and stripe
+npx expo install expo-sqlite
+npx expo install @stripe/stripe-react-native
+
+--build envirment for server
+npm init -y
+npm install stripe
+npm install express nodemon -D
+npx nodemon index.js
+
+
+ <StripeProvider publishableKey="pk_test_51NtqGXCWBcyMptLjOUgDhCAcm8pQG8oz66xblt2IDx7qPIxRaUnoZrN1e4g2CDRFqivXmjOP6JIMcdkLVc9Hzg7c00JU0bZ5ak">
+ </StripeProvider> 

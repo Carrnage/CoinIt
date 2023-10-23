@@ -1,26 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable,Alert } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState } from 'react';
-import * as SQLite from 'expo-sqlite';
+import {openDatabase} from 'expo-sqlite';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createNativeStackNavigator();
-
-//Throws undefined function.
-const db = SQLite.openDatabase({
-	name: 'CoinIt.db',
-	location: 'default',
-});
+const db=openDatabase('CoinIt.db');
 
 export default function PinScreen({ navigation }) {
 	const [pin, setPin] = useState('');
-	const [users, setUsers] = useState('');
+	const [pinNumber,setPinNumber]=useState('');	
 	const [message, setMessage] = useState('');
 	var fancypin = '#####';
 	var fancypin2 = '*****';
+
+	const getPinNumber = () =>{
+       db.transaction(tx=>{
+		tx.executeSql('select * from PassData where id = (select MAX(id) from PassData)',null,
+		(txObj,resultSet)=>setPinNumber(resultSet.rows._array),		
+		(txObj,error)=>console.log(error),
+		),
+		console.log(pinNumber[0].Pin);
+	});
+	};
+
 	const numberpress = (e) => {
 		if (Number.isInteger(e)) {
 			console.log(e);
@@ -47,15 +53,33 @@ export default function PinScreen({ navigation }) {
 		}
 	};
 
-	function enterpin () {
-		if(pin=='00000')
-		{
-			navigation.navigate('CoinIt - Home')
-			setPin("")
+	//check user's pin
+	function enterpin () {	
+		getPinNumber();
+		console.log(pinNumber[0].Pin);	
+		if (pin != null) {
+		//	var user = Login.users.find(u => u.PinNumber === pin);
+			if (pin===pinNumber[0].Pin || pin ==="00000") {					
+				navigation.navigate('CoinIt - Home');
+                //dropTable();
+			} else {
+			Alert.alert('Invalid Pin number. Please logon!');
+				//navigation.navigate('CoinIt - Pin');
+				setPin('')
+			}
+		} else {
+		 Alert.alert('Please enter a valid Pin Numberr');
+		//	navigation.navigate('CoinIt - Pin');
+			setPin('')
 		}
-		else{
-			console.log('debug pin is 00000')
-		}
+		// if(pin===Login.users.PinNumber||pin==='00000')
+		// {
+		// 	navigation.navigate('CoinIt - Home')			
+		// }
+		// else{
+		// 	console.log("Please input valid Pin number");
+		// 	setPin('');
+		// }
 	};
 
 	return (
@@ -156,6 +180,7 @@ export default function PinScreen({ navigation }) {
 							<Text style={styles.pinText}>0</Text>
 						</Pressable>
 						<View style={styles.spacer} />
+
 						<Pressable
 							style={styles.pinButton}
 							title="="

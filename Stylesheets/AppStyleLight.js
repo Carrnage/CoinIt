@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	textInput: {
+		backgroundColor: "#efefefef",
 		borderColor: 'black',
 		borderWidth: 2,
 		width: '50%',
@@ -66,6 +67,20 @@ export const styles = StyleSheet.create({
 		textShadowRadius: 5,
 		fontWeight: 'bold',
 	},
+	subtitle1: {
+		justifyContent: 'center',
+		fontSize: 28,
+		textShadowColor: 'grey',
+		textShadowRadius: 5,
+		fontWeight: 'bold',
+	},
+	subtitle2: {
+		justifyContent: 'center',
+		fontSize: 20,
+		textShadowColor: 'grey',
+		textShadowRadius: 5,
+		fontWeight: 'bold',
+	},
 	spacer: {
 		padding: 6,
 	},
@@ -80,5 +95,20 @@ export const styles = StyleSheet.create({
 		fontSize: 30,
 		color: 'white',
 	},
+	row: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		alignSelf: 'stretch',
+		justifyContent: 'space-between',
+		margin: 8
+	},
+	card: {
+		backgroundColor: "#efefefef",
+	},
+	  cardContainer: {
+		height: 50,
+		marginVertical: 30,
+	},
+	
 
 });

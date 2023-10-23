@@ -1,81 +1,144 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Pressable, Text, TextInput, View, Button } from 'react-native';
+import { Pressable, Text, TextInput, View, Button,Alert } from 'react-native';
 import { styles } from '../../Stylesheets/AppStyleLight';
 import { useState, useEffect } from 'react';
-import * as SQLite from 'expo-sqlite';
+import {openDatabase} from 'expo-sqlite';
+
 
 const Stack = createNativeStackNavigator();
 
-const db = SQLite.openDatabase({
-	name: 'CoinIt.db',
-	location: 'default',
-});
+const db = openDatabase('CoinIt.db',
+(sqlTnx, reg) => console.log('Database has been created successful'),
+(sqlTnx,error) => console.log('Error in creating database' + error.message),
+);
 
 export default function LoginScreen({ navigation }) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isUser, setIsUser] = useState(false);
-	const [users, setUsers] = useState();
 	const [message, setMessage] = useState('');
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [gender, setGender] = useState('');
+	const [pinNumber,setPinNumber]=useState('');
+	const [phone, setPhone] = useState('');
+	const [street,setStreet] = useState('');
+	const [suburb,setSuburb]=useState('');
+	const [city,setCity] = useState('');
+	const [state,setState]= useState('');
+	const [country,setCountry]=useState('');
+	const [postalCode,setPostalCode]=useState('');
+	const [users,setUsers] = useState([]);
+	var isSeedData=0;
 
-	const [loginDTO, setLoginDTO] = useState({
-		id: 'AuthRequest',
-		email: { setEmail },
-		password: { setPassword },
-	});
+	const createUserTable =  () => {
+		 db.transaction( tx => {
+			 tx.executeSql(
+				'CREATE TABLE IF NOT EXISTS ' +
+					'Users ' +
+					'(id INTEGER PRIMARY KEY AUTOINCREMENT, FirstName Text, LastName Text, Gender Text, '+
+					'Email Text, Password Text, Pin Text, Phone Text, Street Text, Suburb Text, City Text, '+
+					'State Text, Country Text, PostalCode Text)',
+				null,
+				(sqlTnx, reg) => {
+					console.log('Table has been created successful');
+				},
+				(txObj,error) => console.log('Error in creating table' + error.message),
+			);});
+			db.transaction(tx=>
+				tx.executeSql('insert into Users (FirstName,LastName,Gender,Email,Password,Pin,Phone,Street,Suburb,City,State,Country,PostalCode) '+
+				'values ("Greg","Han","Male","greg@user.com","Greg12345","12345","213434","123 Eye Street","Invercargill", '+
+				'"Invercargill","Southland","New Zealand","9812" )',null,
+				(sqlTnx,reg)=>console.log(`${firstName} has been added successful`),
+				(sqlTnx,error)=>console.log('error on adding a user ' + error.message),
+				),);
 
-	useEffect(() => {
-		getUserData();
-	}, []);
+			db.transaction(tx=>	
+				tx.executeSql('insert into Users (FirstName,LastName,Gender,Email,Password,Pin,Phone,Street,Suburb,City,State,Country,PostalCode) '+
+				 'values ("Kevin","Young","Male","kevin@user.com","Kevin12345","12345","213437","133 Don Street","Invercargill", '+
+				 '"Invercargill","Southland","New Zealand","9812" )',null,
+				 (sqlTnx,reg)=>console.log(`${firstName} has been added successful`),
+				 (sqlTnx,error)=>console.log('error on adding a user ' + error.message),
+				 ),);
+
+			db.transaction(tx=>
+				 tx.executeSql('insert into Users (FirstName,LastName,Gender,Email,Password,Pin,Phone,Street,Suburb,City,State,Country,PostalCode) '+
+				 'values ("Quintin","Carl","Male","quintin@user.com","Quintin12345","12345","213457","133 Eccle Street","Groe", '+
+				 '"Invercargill","Southland","New Zealand","9812" )',null,
+				 (sqlTnx,reg)=>console.log(`${firstName} has been added successful`),
+				 (sqlTnx,error)=>console.log('error on adding a user ' + error.message),
+				 ), );
+		};
+
+	const createPassDataTable = () =>{
+         db.transaction(tx=>{
+			tx.executeSql('CREATE TABLE IF NOT EXISTS PassData (id INTEGER PRIMARY KEY AUTOINCREMENT, Email Text, Pin Text)',null,
+			(sqlTnx,reg)=>console.log('The Pass Date table has been created.'),
+			(sqlTnx,error)=>console.log(error),
+			); });
+	};
+
+   const AddPin =(email,pinNumber) =>{
+	   db.transaction(tx=>{
+		tx.executeSql('insert into PassData (Email,Pin), vlaues(?,?)',[email],[pinNumber],
+		(sqlTnx,reg)=>console.log("A new recorde has been inserted"),
+		(sqlTnx,error)=>console.log(error),);
+	   });
+   }
+
 
 	const getUserData = () => {
-		db.transaction((tx) => {
-			tx.executeSql('SELECT * FROM Users', [], (tx, results) => {
-				const len = results.rows.length;
-				for (let i = 0; i < len; i++) {
-					const row = results.rows.item(i);
-					console.log(
-						`User ID: ${row.id}, Name: ${row.name}, Email: ${row.email}`
-					);
-					setUsers(row);
-					// if(results.rows.item(i).email==setEmail&&results.rows.item(i).password==setPassword){
-					//     setIsUser=true;
-					//     console.log(isUser);
-					//     console.log(setIsUser);
-					// }
-				}
-			});
-		});
-	};
+		db.transaction(tx => {
+			tx.executeSql('SELECT * FROM Users', null,
+			(txObj,resultSet)=>setUsers(resultSet.rows._array),
+			(txObj,error)=>console.log(error),
+	         )},);
+		};
 
-	const handleLogin = async () => {
-		// console.log(loginDTO);
-		// switch(loginDTO.email){
-		//   case 'debug':
-		//     console.log("debug log in if seen outside test build PANIC");
-		//     navigation.navigate("CoinIt - Pin");
-		//   default:
-		//     console.log("login failed try to debug")
-		//     break;
-		// }
-		if (email != null && password != null) {
-			const user = users.find(
-				(u) => u.email === email && u.password === password
-			);
-			if (user) {
-				navigation.navigate('CoinIt - Pin');
-				setEmail('')
-				setPassword('')
+		useEffect(() => {			
+		    if(isSeedData<1){
+				createUserTable();
+				createPassDataTable();	
+			};
+			isSeedData = 2;						
+		}, []);
+		
+	const handleLogin = () => {		
+		
+		if (email != null && password != null) {	
+			getUserData();
+			const user = users.filter(u => u.Email === email && u.Password === password)
+			if (user.length>0) {
+				console.log(user[0].FirstName, user[0].Pin);
+				AddPin(user[0].Email,user[0].pinNumber);
+				navigation.navigate('CoinIt - Pin');			
 			} else {
-				setMessage('Invalid username or password. Please logon!');
+				Alert.alert('Invalid username or password. Please logon!');
+				setEmail('');
+				setPassword('');
+				//navigation.navigate('CoinIt-Login');
 			}
 		} else {
-			setMessage('Please enter a Username and Password');
+			Alert.alert("Please enter a Email and Password");
+			setEmail('');
+			setPassword('');
+			//navigation.navigate('CoinIt-Login');
 		}
 	};
-	const debug = async ()=> {
+
+	const showUsers = () =>{
+         return users.map((user,index)=>{
+			return (
+				<View style={styles.row} key={index}>
+					<Text>{user.FirstName}</Text>
+					<Text>{user.Paassword}</Text>
+				</View>
+			);});
+	};
+
+const debug = async ()=> {
 		     console.log("debug log in if seen outside test build PANIC");
 			 setEmail('')
 			 setPassword('')
@@ -121,15 +184,18 @@ const TESTPAGE = async () => {
 					onPress={handleLogin}>
 					<Text style={styles.buttonText}>Login</Text>
 				</Pressable>
+
 				<Pressable
 					style={styles.button}
 					onPress={registerPress}>
 					<Text style={styles.buttonText}>Register</Text>
 				</Pressable>
+
 				<Pressable
 					style={styles.button}
 					onPress={debug}><Text style={styles.buttonText}>DEBUG</Text></Pressable>
-			</View>
+			</View>	
+			{showUsers()}		
 		</View>
 	);
 }
