@@ -9,10 +9,7 @@ import {openDatabase} from 'expo-sqlite';
 
 const Stack = createNativeStackNavigator();
 
-const db = openDatabase('CoinIt.db',
-(sqlTnx, reg) => console.log('Database has been created successful'),
-(sqlTnx,error) => console.log('Error in creating database' + error.message),
-);
+
 
 export default function LoginScreen({ navigation }) {
 	const [email, setEmail] = useState('');
@@ -32,6 +29,11 @@ export default function LoginScreen({ navigation }) {
 	const [postalCode,setPostalCode]=useState('');
 	const [users,setUsers] = useState([]);
 	var isSeedData=0;
+
+	const db = openDatabase('CoinIt.db',
+	(sqlTnx, reg) => console.log('Database has been created successful'),
+	(sqlTnx,error) => console.log('Error in creating database' + error.message),
+	);
 
 	const createUserTable =  () => {
 		 db.transaction( tx => {
