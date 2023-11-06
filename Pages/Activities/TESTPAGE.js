@@ -7,7 +7,7 @@ import { render } from 'react-dom';
 
 
 const Stack = createNativeStackNavigator();
-const db = SQLite.openDatabase('db.testDb')
+/*const db = SQLite.openDatabase('db.testDb')
 class tester extends React.Component {
     constructor(props) {
         this.state = {
@@ -61,4 +61,12 @@ export default function TESTPAGE1({ navigation }) {
             </ScrollView>
         </View>
     );
+}
+*/
+export default function TESTPAGE1({ navigation }) {
+    return (
+        <View>
+            <Text>Hello world</Text>
+        </View>
+    )
 }
